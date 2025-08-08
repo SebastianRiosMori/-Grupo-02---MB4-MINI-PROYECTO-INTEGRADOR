@@ -6,5 +6,11 @@ function mostrarmensaje(){
             : "El texto ingresado no es un palindromo.";
 }
 
-function esPalindromo(entrada){
+function esPalindromo(Entrada){
+    let limpiarCadena = entrada.replace(/[^a-zA-Z0-9]/g,"")
+    let cadenaMinuscula = limpiarCadena.toLowerCase();
+    let arregloMinuscula = cadenaMinuscula.split("");
+    let minusculasRevertida = arregloMinuscula.reverse();
+    let cadenaMinusculaRevertida = minusculasRevertida.join("");
+    return cadenaMinusculaRevertida == cadenaMinuscula ? true : false;
 }
