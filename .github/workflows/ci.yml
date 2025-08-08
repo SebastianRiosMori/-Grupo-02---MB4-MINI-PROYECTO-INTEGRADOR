@@ -1,0 +1,34 @@
+# .github/workflows/ci.yml
+name: Java CI
+
+on:
+  push:
+    branches:
+      - main
+      - Development
+      - feature/**
+  pull_request:
+    branches:
+      - main
+      - Development
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Java
+      uses: actions/setup-java@v4
+      with:
+        distribution: 'temurin'
+        java-version: '17'  # O la versión que uses
+
+    - name: Build with Maven
+      run: mvn -B package --file pom.xml
+
+    - name: Run Tests
+      run: mvn test
+
