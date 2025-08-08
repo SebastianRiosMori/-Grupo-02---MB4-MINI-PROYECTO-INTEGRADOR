@@ -6,7 +6,7 @@ function mostrarmensaje(){
             : "El texto ingresado no es un palindromo.";
 }
 
-function esPalindromo(Entrada){
+function esPalindromo(entrada){
     let limpiarCadena = entrada.replace(/[^a-zA-Z0-9]/g,"")
     let cadenaMinuscula = limpiarCadena.toLowerCase();
     let arregloMinuscula = cadenaMinuscula.split("");
