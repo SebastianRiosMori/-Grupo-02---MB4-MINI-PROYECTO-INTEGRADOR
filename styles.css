@@ -6,7 +6,7 @@
 
 :root {
   --color-texto: #e0e8ff;
-  --color-acento: #9f7bff;
+  --color-acento: #5922f0;
 }
 
 html, body {
@@ -16,18 +16,13 @@ html, body {
 
 body {
   background:
-    radial-gradient(ellipse at 10% 10%, rgba(255,255,255,0.03), transparent 10%),
-    radial-gradient(ellipse at 90% 30%, rgba(120,80,255,0.06), transparent 10%),
-    linear-gradient(180deg, #000010 0%, #00091a 40%, #000000 100%);
+    radial-gradient(ellipse at 10% 10%, rgb(255,255,255,3%), transparent 10%),
+    radial-gradient(ellipse at 90% 30%, rgb(120,80,255,6%), transparent 10%),
+    linear-gradient(180deg, #000010 0%, #00091a 40%, #000 100%);
   color: var(--color-texto);
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-}
-
-@keyframes estrellas {
-  from { transform: translateY(0) translateX(0); }
-  to { transform: translateY(-50px) translateX(80px); }
 }
 
 /* Encabezado */
@@ -51,12 +46,12 @@ main {
 }
 
 .verificador {
-  background: rgba(255,255,255,0.03);
+  background: rgb(255,255,255,3%);
   padding: 1.5rem;
   border-radius: 12px;
   backdrop-filter: blur(6px);
-  border: 1px solid rgba(255,255,255,0.05);
-  box-shadow: 0 8px 20px rgba(0,0,0,0.5);
+  border: 1px solid rgb(255,255,255,5%);
+  box-shadow: 0 8px 20px rgb(0,0,0,50%);
   width: min(90%, 500px);
   display: flex;
   flex-direction: column;
@@ -66,10 +61,10 @@ main {
 .verificador input {
   padding: 1rem;
   font-size: 1rem;
-  border: 1px solid rgba(255,255,255,0.1);
+  border: 1px solid rgb(255,255,255,10%);
   border-radius: 8px;
   outline: none;
-  background: rgba(0,0,0,0.3);
+  background: rgb(0,0,0,30%);
   color: var(--color-texto);
 }
 
@@ -96,10 +91,10 @@ main {
 }
 
 .resultado {
-  background: rgba(255,255,255,0.02);
+  background: rgb(255,255,255,2%);
   padding: 1.5rem;
   border-radius: 12px;
-  border: 1px solid rgba(255,255,255,0.05);
+  border: 1px solid rgb(255,255,255,5%);
   width: min(90%, 500px);
 }
 
@@ -118,7 +113,7 @@ footer {
   font-size: 0.85rem;
   padding: 1rem;
   color: #b5c4ff;
-  background: rgba(0,0,0,0.4);
+  background: rgb(0,0,0,40%);
 }
 
 @media (max-width: 500px) {
@@ -128,12 +123,12 @@ footer {
 }
   /* Estado correcto (palíndromo) */
 .correcto {
-  border: 2px solid #4ade80 !important; /* verde */
-  box-shadow: 0 0 8px #4ade80;
+  border: 2px solid #24ec06 !important; /* verde */
+  box-shadow: 0 0 8px #24ec06;
 }
 
 /* Estado incorrecto (no palíndromo) */
 .incorrecto {
-  border: 2px solid #f87171 !important; /* rojo */
-  box-shadow: 0 0 8px #f87171;
+  border: 2px solid #ea0707 !important; /* rojo */
+  box-shadow: 0 0 8px #ea0707;
 }
