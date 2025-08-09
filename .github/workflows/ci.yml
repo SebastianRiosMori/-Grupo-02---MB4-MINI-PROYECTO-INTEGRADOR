@@ -1,40 +1,56 @@
-name: Java CI with Maven
+name: Integración Continua - Java CI
 
 on:
   push:
     branches:
       - main
-      - Development
+      - development
       - feature/**
   pull_request:
     branches:
       - main
-      - Development
+      - development
 
 jobs:
   build:
+    name: Analizar y Compilar el Código
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: ✅ Paso 1: Clonar el repositorio
+        uses: actions/checkout@v3
 
-    - name: Set up Java
-      uses: actions/setup-java@v4
-      with:
-        distribution: 'temurin'
-        java-version: '17'
+      - name: ✅ Paso 2: Configurar Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'  # Asegúrate que esta sea tu versión real
 
-    - name: Cache Maven packages
-      uses: actions/cache@v3
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-        restore-keys: |
-          ${{ runner.os }}-maven-
+      - name: 🔍 Paso 3: Analizar estructura del proyecto
+        run: |
+          echo "📁 Verificando la existencia de 'pom.xml'..."
+          if [ ! -f "pom.xml" ]; then
+            echo "❌ Error: No se encontró el archivo pom.xml en el directorio raíz del proyecto."
+            exit 1
+          fi
+          echo "✅ Archivo pom.xml encontrado correctamente."
 
-    - name: Build with Maven
-      run: mvn -B compile
+      - name: 🛠️ Paso 4: Compilar con Maven
+        run: |
+          echo "🏗️ Iniciando compilación del proyecto..."
+          mvn -B clean compile --file pom.xml
+          echo "✅ Compilación exitosa."
 
-    - name: Run Tests
-      run: mvn test   
+      - name: 🧪 Paso 5: Ejecutar pruebas
+        run: |
+          echo "🧪 Ejecutando pruebas unitarias..."
+          mvn test --file pom.xml
+          echo "✅ Pruebas ejecutadas correctamente."
+
+      - name: 🎉 Paso 6: Éxito total
+        if: success()
+        run: echo "✅ Integración continua completada con éxito en esta rama. Todo está bien estructurado."
+
+      - name: 🚨 Error en el flujo
+        if: failure()
+        run: echo "❌ La integración continua ha fallado. Revisa los pasos anteriores para encontrar errores."
