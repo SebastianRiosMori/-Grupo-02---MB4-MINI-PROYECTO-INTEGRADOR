@@ -16,38 +16,38 @@ jobs:
   syntax-check:
     runs-on: ubuntu-latest
     steps:
-      - name: "\uD83D\uDCE5 Clonar repositorio"
+      - name: "📥 Clonar repositorio"
         uses: actions/checkout@v3
 
-      - name: "\uD83D\uDD0D Verificar sintaxis HTML"
+      - name: "🔍 Verificar sintaxis HTML"
         run: |
           sudo apt-get update && sudo apt-get install -y tidy
-          echo "\uD83D\uDCC4 Revisando archivos HTML..."
+          echo "📄 Revisando archivos HTML..."
           for file in $(find . -name "*.html"); do
             if ! tidy -qe "$file"; then
-              echo "\u274C Error de sintaxis en HTML: $file"
+              echo "❌ Error de sintaxis en HTML: $file"
               exit 1
             fi
           done
 
-      - name: "\uD83C\uDFA8 Verificar sintaxis CSS"
+      - name: "🎨 Verificar sintaxis CSS"
         run: |
-          echo "\uD83C\uDFA8 Revisando archivos CSS..."
+          echo "🎨 Revisando archivos CSS..."
           npm install -g stylelint stylelint-config-standard
           for file in $(find . -name "*.css"); do
             if ! stylelint "$file"; then
-              echo "\u274C Error de sintaxis en CSS: $file"
+              echo "❌ Error de sintaxis en CSS: $file"
               exit 1
             fi
           done
 
-      - name: "\u26A1 Verificar sintaxis JavaScript"
+      - name: "⚡ Verificar sintaxis JavaScript"
         run: |
-          echo "\u26A1 Revisando archivos JavaScript..."
+          echo "⚡ Revisando archivos JavaScript..."
           npm install -g eslint
           for file in $(find . -name "*.js"); do
             if ! eslint "$file"; then
-              echo "\u274C Error de sintaxis en JS: $file"
+              echo "❌ Error de sintaxis en JS: $file"
               exit 1
             fi
           done
