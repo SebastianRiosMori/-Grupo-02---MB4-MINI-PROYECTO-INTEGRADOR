@@ -22,10 +22,20 @@ Sigan o miren nuestro tablero del trello:
 2. Abrimos el link y el index en nuestro navegador(ya sea el de nuestra preferencia)
 3. Y listo, ya podemos visualizarlo
 
-🛜Enlace en nuestra pagina web
+🛜DEPENDENCIAS
 ---
-👤 [Visite nuestro sitio web](https://sebastianriosmori.github.io/-Mini-Proyecto-Modelo-03---GRUPO-02/)
---
+### 1️⃣ Instalar Python
+1. Descarga Python desde la página oficial: [https://www.python.org/downloads/windows/](https://www.python.org/downloads/windows/)
+2. Instala la versión más reciente (se recomienda Python 3.x).
+### 2️⃣ Instala Python
+1. Ejectuamos el isntalador instalado
+2. MUY IMPORTANTE **marca la casilla**:  `Add Python 3.x to PATH` antes de hacer clic en "Install Now".
+   Esto añade Python a las variables de entorno para que puedas usarlo desde la terminal
+### 3️⃣ Ejecuta lo siguiente con git
+1. `python -m htpp.server8000`
+2. Esto iniciará un servidor HTTP simple en el puerto **8000**.
+3. Luego abre en tu navegador: [http://localhost:8000](http://localhost:8000)
+---
 👥Integrantes y perfiles
 ---
 | Rol                                  | Nombre             | GitHub                                                     |
