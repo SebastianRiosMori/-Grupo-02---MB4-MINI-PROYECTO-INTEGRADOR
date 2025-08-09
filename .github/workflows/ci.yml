@@ -1,11 +1,11 @@
-name: Integración Continua - Java CI
+name: "Integración Continua - Java CI"
 
 on:
   push:
     branches:
       - main
       - Development
-      - feature/**
+      - 'feature/**'
   pull_request:
     branches:
       - main
@@ -13,20 +13,20 @@ on:
 
 jobs:
   build:
-    name: Analizar y Compilar el Código
+    name: "Analizar y Compilar el Código"
     runs-on: ubuntu-latest
 
     steps:
-      - name: ✅ Paso 1: Clonar el repositorio
+      - name: "✅ Paso 1: Clonar el repositorio"
         uses: actions/checkout@v3
 
-      - name: ✅ Paso 2: Configurar Java
+      - name: "✅ Paso 2: Configurar Java"
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '17'  # Asegúrate que esta sea tu versión real
+          java-version: '17'
 
-      - name: 🔍 Paso 3: Analizar estructura del proyecto
+      - name: "🔍 Paso 3: Analizar estructura del proyecto"
         run: |
           echo "📁 Verificando la existencia de 'pom.xml'..."
           if [ ! -f "pom.xml" ]; then
@@ -35,22 +35,22 @@ jobs:
           fi
           echo "✅ Archivo pom.xml encontrado correctamente."
 
-      - name: 🛠️ Paso 4: Compilar con Maven
+      - name: "🛠️ Paso 4: Compilar con Maven"
         run: |
           echo "🏗️ Iniciando compilación del proyecto..."
           mvn -B clean compile --file pom.xml
           echo "✅ Compilación exitosa."
 
-      - name: 🧪 Paso 5: Ejecutar pruebas
+      - name: "🧪 Paso 5: Ejecutar pruebas"
         run: |
           echo "🧪 Ejecutando pruebas unitarias..."
           mvn test --file pom.xml
           echo "✅ Pruebas ejecutadas correctamente."
 
-      - name: 🎉 Paso 6: Éxito total
-        if: success()
+      - name: "🎉 Paso 6: Éxito total"
+        if: ${{ success() }}
         run: echo "✅ Integración continua completada con éxito en esta rama. Todo está bien estructurado."
 
-      - name: 🚨 Error en el flujo
-        if: failure()
+      - name: "🚨 Error en el flujo"
+        if: ${{ failure() }}
         run: echo "❌ La integración continua ha fallado. Revisa los pasos anteriores para encontrar errores."
