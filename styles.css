@@ -9,15 +9,16 @@
   --color-acento: #5922f0;
 }
 
-html, body {
+html,
+body {
   height: 100%;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 body {
   background:
-    radial-gradient(ellipse at 10% 10%, rgb(255,255,255,3%), transparent 10%),
-    radial-gradient(ellipse at 90% 30%, rgb(120,80,255,6%), transparent 10%),
+    radial-gradient(ellipse at 10% 10%, rgb(255 255 255 / 3%), transparent 10%),
+    radial-gradient(ellipse at 90% 30%, rgb(120 80 255 / 6%), transparent 10%),
     linear-gradient(180deg, #000010 0%, #00091a 40%, #000 100%);
   color: var(--color-texto);
   display: flex;
@@ -35,6 +36,7 @@ header h1 {
   font-size: clamp(1.8rem, 4vw, 2.5rem);
   color: white;
 }
+
 /* Contenido principal */
 main {
   flex: 1;
@@ -46,12 +48,12 @@ main {
 }
 
 .verificador {
-  background: rgb(255,255,255,3%);
+  background: rgb(255 255 255 / 3%);
   padding: 1.5rem;
   border-radius: 12px;
   backdrop-filter: blur(6px);
-  border: 1px solid rgb(255,255,255,5%);
-  box-shadow: 0 8px 20px rgb(0,0,0,50%);
+  border: 1px solid rgb(255 255 255 / 5%);
+  box-shadow: 0 8px 20px rgb(0 0 0 / 50%);
   width: min(90%, 500px);
   display: flex;
   flex-direction: column;
@@ -61,10 +63,10 @@ main {
 .verificador input {
   padding: 1rem;
   font-size: 1rem;
-  border: 1px solid rgb(255,255,255,10%);
+  border: 1px solid rgb(255 255 255 / 10%);
   border-radius: 8px;
   outline: none;
-  background: rgb(0,0,0,30%);
+  background: rgb(0 0 0 / 30%);
   color: var(--color-texto);
 }
 
@@ -91,10 +93,10 @@ main {
 }
 
 .resultado {
-  background: rgb(255,255,255,2%);
+  background: rgb(255 255 255 / 2%);
   padding: 1.5rem;
   border-radius: 12px;
-  border: 1px solid rgb(255,255,255,5%);
+  border: 1px solid rgb(255 255 255 / 5%);
   width: min(90%, 500px);
 }
 
@@ -113,15 +115,17 @@ footer {
   font-size: 0.85rem;
   padding: 1rem;
   color: #b5c4ff;
-  background: rgb(0,0,0,40%);
+  background: rgb(0 0 0 / 40%);
 }
 
-@media (max-width: 500px) {
-  .verificador, .resultado {
+@media (width <= 500px) {
+  .verificador,
+  .resultado {
     padding: 1rem;
   }
 }
-  /* Estado correcto (palíndromo) */
+
+/* Estado correcto (palíndromo) */
 .correcto {
   border: 2px solid #24ec06 !important; /* verde */
   box-shadow: 0 0 8px #24ec06;
