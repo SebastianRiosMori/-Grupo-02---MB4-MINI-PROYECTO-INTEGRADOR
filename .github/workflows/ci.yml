@@ -1,4 +1,4 @@
-name: "Integración Continua - Java CI"
+name: Verificar sintaxis HTML, CSS y JS
 
 on:
   push:
@@ -10,47 +10,43 @@ on:
     branches:
       - main
       - Development
+      - 'feature/**'
 
 jobs:
-  build:
-    name: "Analizar y Compilar el Código"
+  syntax-check:
     runs-on: ubuntu-latest
-
     steps:
-      - name: "✅ Paso 1: Clonar el repositorio"
+      - name: "📥 Clonar repositorio"
         uses: actions/checkout@v3
 
-      - name: "✅ Paso 2: Configurar Java"
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
-
-      - name: "🔍 Paso 3: Analizar estructura del proyecto"
+      - name: "🔍 Verificar sintaxis HTML"
         run: |
-          echo "📁 Verificando la existencia de 'pom.xml'..."
-          if [ ! -f "pom.xml" ]; then
-            echo "❌ Error: No se encontró el archivo pom.xml en el directorio raíz del proyecto."
-            exit 1
-          fi
-          echo "✅ Archivo pom.xml encontrado correctamente."
+          echo "📄 Revisando archivos HTML..."
+          for file in $(find . -name "*.html"); do
+            if ! tidy -qe "$file"; then
+              echo "❌ Error de sintaxis en HTML: $file"
+              exit 1
+            fi
+          done
 
-      - name: "🛠️ Paso 4: Compilar con Maven"
+      - name: "🎨 Verificar sintaxis CSS"
         run: |
-          echo "🏗️ Iniciando compilación del proyecto..."
-          mvn -B clean compile --file pom.xml
-          echo "✅ Compilación exitosa."
+          echo "🎨 Revisando archivos CSS..."
+          npm install -g stylelint stylelint-config-standard
+          for file in $(find . -name "*.css"); do
+            if ! stylelint "$file"; then
+              echo "❌ Error de sintaxis en CSS: $file"
+              exit 1
+            fi
+          done
 
-      - name: "🧪 Paso 5: Ejecutar pruebas"
+      - name: "⚡ Verificar sintaxis JavaScript"
         run: |
-          echo "🧪 Ejecutando pruebas unitarias..."
-          mvn test --file pom.xml
-          echo "✅ Pruebas ejecutadas correctamente."
-
-      - name: "🎉 Paso 6: Éxito total"
-        if: ${{ success() }}
-        run: echo "✅ Integración continua completada con éxito en esta rama. Todo está bien estructurado."
-
-      - name: "🚨 Error en el flujo"
-        if: ${{ failure() }}
-        run: echo "❌ La integración continua ha fallado. Revisa los pasos anteriores para encontrar errores."
+          echo "⚡ Revisando archivos JavaScript..."
+          npm install -g eslint
+          for file in $(find . -name "*.js"); do
+            if ! eslint "$file"; then
+              echo "❌ Error de sintaxis en JS: $file"
+              exit 1
+            fi
+          done
