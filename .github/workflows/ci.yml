@@ -59,11 +59,10 @@ jobs:
           if [ -z "$js_files" ]; then
             echo "✅ No se encontraron archivos JavaScript, omitiendo revisión."
           else
-            npm install -g eslint
             for file in $js_files; do
-              if ! eslint "$file"; then
+              if ! node --check "$file"; then
                 echo "❌ Error de sintaxis en JS: $file"
                 exit 1
               fi
             done
-          fi
+          fi  
