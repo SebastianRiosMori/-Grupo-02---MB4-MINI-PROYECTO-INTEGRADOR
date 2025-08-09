@@ -35,20 +35,30 @@ jobs:
           echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
           npm install -g stylelint stylelint-config-standard
           echo "🎨 Revisando archivos CSS..."
-          for file in $(find . -name "*.css"); do
-            if ! stylelint "$file"; then
-              echo "❌ Error de sintaxis en CSS: $file"
-              exit 1
-            fi
-          done
+          css_files=$(find . -name "*.css")
+          if [ -z "$css_files" ]; then
+            echo "✅ No se encontraron archivos CSS, omitiendo revisión."
+          else
+            for file in $css_files; do
+              if ! stylelint "$file"; then
+                echo "❌ Error de sintaxis en CSS: $file"
+                exit 1
+              fi
+            done
+          fi
 
       - name: "⚡ Verificar sintaxis JavaScript"
         run: |
           echo "⚡ Revisando archivos JavaScript..."
-          npm install -g eslint
-          for file in $(find . -name "*.js"); do
-            if ! eslint "$file"; then
-              echo "❌ Error de sintaxis en JS: $file"
-              exit 1
-            fi
-          done
+          js_files=$(find . -name "*.js")
+          if [ -z "$js_files" ]; then
+            echo "✅ No se encontraron archivos JavaScript, omitiendo revisión."
+          else
+            npm install -g eslint
+            for file in $js_files; do
+              if ! eslint "$file"; then
+                echo "❌ Error de sintaxis en JS: $file"
+                exit 1
+              fi
+            done
+          fi
