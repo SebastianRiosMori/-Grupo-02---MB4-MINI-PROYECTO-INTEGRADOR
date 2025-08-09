@@ -10,7 +10,7 @@ function permutaciones(str){
             resultado.push(char + subPerm);
         }
     }
-    return [...new set(resultado)];
+    return [...new Set(resultado)];
 }
 
 //Api(Datamuse):
