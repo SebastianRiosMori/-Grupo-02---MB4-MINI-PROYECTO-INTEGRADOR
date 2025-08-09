@@ -12,8 +12,8 @@ function permutaciones(str){
     }
     return [...new set(resultado)];
 }
-//Api(Datamuse):
 
+//Api(Datamuse):
 let res = await fetch(`https://api.datamuse.com/words?sp=${palabra}&max=1`);
 let data = await res.json();
 
@@ -23,7 +23,41 @@ async function palabraValida(palabra){
     return data.length > 0 && data[0].word.toLowerCase() === palabra.toLowerCase();
 }
 
-//Formulario:
+//funcion Formulario:
+document.getElementById("btn anagrama").addEventListener("submit", async function (e) {
+    e.preventDefault(); //Evita recargar la pagina
+     
+    if(palabra.length < 3){
+        document.getElementById(("rstAnagrama").textContent = "La palabra debe tener al menos 3 letras");
+        return;
+    }
+
+    //Mensaje de espera:
+    document.getElementById("rstAnagrama").textContent = "Generando...";
+
+    let posibles = permutaciones(palabra);
+
+    //Filtro:
+    posibles = posibles.filter(p => p.length >= 3);
+
+    let validas = [];
+
+    //Verificamos las combinaciones y agregamos al array:
+    await Promise.all(posibles.map(async p =>{
+        if(await palabraValida(p)){
+            validas.push(p);
+        }
+    }));
+
+    //Mostrar resultado:    
+    if(validas.length > 0){
+        document.getElementById("rstAnagrama").textContent = "Palabras Validas " + validas.join(", ");
+    }
+    else{
+        document.getElementById("rstAnagrama").textContent = "No se encontraron palabras...";
+    }
+
+});
 
 
 
