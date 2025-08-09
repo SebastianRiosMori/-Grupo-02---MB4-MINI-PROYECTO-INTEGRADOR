@@ -32,10 +32,11 @@ jobs:
 
       - name: "🎨 Verificar sintaxis CSS"
         run: |
-          echo "🎨 Revisando archivos CSS..."
+          echo '{ "extends": "stylelint-config-standard" }' > .stylelintrc.json
           npm install -g stylelint stylelint-config-standard
+          echo "🎨 Revisando archivos CSS..."
           for file in $(find . -name "*.css"); do
-            if ! stylelint "$file" --config '{"extends": "stylelint-config-standard"}'; then
+            if ! stylelint "$file"; then
               echo "❌ Error de sintaxis en CSS: $file"
               exit 1
             fi
