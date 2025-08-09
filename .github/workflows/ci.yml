@@ -23,12 +23,17 @@ jobs:
         run: |
           sudo apt-get update && sudo apt-get install -y tidy
           echo "📄 Revisando archivos HTML..."
-          for file in $(find . -name "*.html"); do
-            if ! tidy -qe "$file"; then
-              echo "❌ Error de sintaxis en HTML: $file"
-              exit 1
-            fi
-          done
+          html_files=$(find . -name "*.html")
+          if [ -z "$html_files" ]; then
+            echo "✅ No se encontraron archivos HTML, omitiendo revisión."
+          else
+            for file in $html_files; do
+              if ! tidy -qe "$file"; then
+                echo "❌ Error de sintaxis en HTML: $file"
+                exit 1
+              fi
+            done
+          fi
 
       - name: "🎨 Verificar sintaxis CSS"
         run: |
