@@ -35,7 +35,7 @@ jobs:
           echo "🎨 Revisando archivos CSS..."
           npm install -g stylelint stylelint-config-standard
           for file in $(find . -name "*.css"); do
-            if ! stylelint "$file"; then
+            if ! stylelint "$file" --config '{"extends": "stylelint-config-standard"}'; then
               echo "❌ Error de sintaxis en CSS: $file"
               exit 1
             fi
