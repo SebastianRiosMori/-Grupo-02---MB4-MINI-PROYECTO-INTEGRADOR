@@ -32,7 +32,7 @@ Sigan o miren nuestro tablero del trello:
 2. MUY IMPORTANTE **marca la casilla**:  `Add Python 3.x to PATH` antes de hacer clic en "Install Now".
    Esto añade Python a las variables de entorno para que puedas usarlo desde la terminal
 ### 3️⃣ Ejecuta lo siguiente con git
-1. `python -m htpp.server 8000`
+1. `python -m http.server 8000`
 2. Esto iniciará un servidor HTTP simple en el puerto **8000**.
 3. Luego abre en tu navegador: [http://localhost:8000](http://localhost:8000)
 ---
